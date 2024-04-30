@@ -1,0 +1,149 @@
+﻿@using System.Globalization
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+   
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+}
+<html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName" dir="@(currentCulture=="en"?"ltr":"rtl")">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - App.UI</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/App.UI.styles.css" asp-append-version="true" />  
+    <link href="~/lib/magnific-popup.js/magnific-popup.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="master-of-content">
+        <div class="red-header">
+            <header class="header py-3 mb-4 border-bottom">
+                <ul class="">
+                    <li class="address">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                            <path fill="#ffffff"
+                                  d="M172.3 501.7C27 291 0 269.4 0 192 0 86 86 0 192 0s192 86 192 192c0 77.4-27 99-172.3 309.7-9.5 13.8-29.9 13.8-39.5 0zM192 272c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z" />
+                        </svg>
+                        <span>K00_Address</span>
+                    </li>
+                    <li class="tele">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="#ffffff"
+                                  d="M497.4 361.8l-112-48a24 24 0 0 0 -28 6.9l-49.6 60.6A370.7 370.7 0 0 1 130.6 204.1l60.6-49.6a23.9 23.9 0 0 0 6.9-28l-48-112A24.2 24.2 0 0 0 122.6 .6l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.3 24.3 0 0 0 -14-27.6z" />
+                        </svg>
+                        <a class="tele-a" href="tel:16164"><span>16164</span></a>
+                    </li>
+                </ul>
+            </header>
+        </div>
+        <div class="container">
+            <header class="py-3 mb-4 border-bottom">
+                <div class="tanmeyah">
+                    <img src="/images/tanmeyalogos-01-1.png" alt="" />
+                </div>
+                <button class="menu-toggle" id="menuToggle">☰</button> <!-- Toggle Button for mobile -->
+                @(await Component.InvokeAsync("NavBar"))
+            
+            </header>
+        </div>
+
+        <div>
+            <main role="main">
+                @RenderBody()
+            </main>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="contain-foter-info">
+                    <div class="contain-row">
+                        <div><img src="/images/tanmeyalogos-02.png" alt=""></div>
+                        <div class="numb-adr">
+                            <i class="fa fa-envelope"></i><a href="mailto:info@tanmeyah.com">info@tanmeyah.com</a>
+                        </div>
+                        <div class="numb-adr"><i class="fa fa-phone"></i><a href="tel:16164">16164</a></div>
+                        <div><i class="fa fa-map-marker"></i><span>.GetLocalizedString("Layout", "K00_Address")</span></div>
+                        <div class="info-row">
+                            <p>
+                                .GetLocalizedString("Layout", "K12_FooterParghraph")
+                            </p>
+                        </div>
+                    </div>
+                    <div class="contain-row">
+                        <div class="main-title">
+                            <span>.GetLocalizedString("Layout", "K03_ABOUT US")</span>
+                        </div>
+                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K04_History")</a></div>
+                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K05_OurPerformance")</a></div>
+                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K06_CorporateCitizenshi")</a></div>
+                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K07_SuccessStories")</a></div>
+                    </div>
+                    <div class="contain-row">
+                        <div class="main-title">
+                            <span>
+                                .GetLocalizedString("Layout", "K13_OURSERVICES")
+                            </span>
+                        </div>
+                       @*  @foreach (var finincialProgram in FinincialPrograms.Value)
+                        {
+                            <div class="data-info">
+                                <a href="@finincialProgram.UrlName">
+                                    @finincialProgram.Name
+                                </a>
+                            </div>
+                        } *@
+
+                    </div>
+                    <div class="contain-row"><div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d432.0227504837829!2d31.2840445!3d29.974199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458385e217a526b%3A0xe089f0c789577c2d!2z2KrZhtmF2YrZhw!5e0!3m2!1sen!2seg!4v1713181775264!5m2!1sen!2seg" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
+                </div>
+                <hr>
+
+                <div class="last-footer">
+                    <div>© 2024 - Tanmeyah</div>
+                    <div class="terms">
+                        <div class="data-info">
+                            <a href="#">.GetLocalizedString("Layout", "K14_Privacy")</a>
+                        </div>
+                        <div class="data-info">
+                            <a href="#">.GetLocalizedString("Layout", "K15_TermsConditions")</a>
+                        </div>
+                        <div class="data-info">
+                            <a href="#">.GetLocalizedString("Layout", "K16_FRACompliance")</a>
+                        </div>
+                    </div>
+                    <div class="terms">
+                        <div class="fac"><i class="fa fa-facebook"></i></div>
+                        <div><i class="fa fa-linkedin"></i></div>
+                        <div><i class="fa fa-youtube"></i></div>
+                        <div><i class="fa fa-instagram"></i></div>
+                        <div><i class="fa fa-flickr"></i></div>
+                    </div>
+                </div>
+
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>  
+    <script src="~/lib/magnific-popup.js/jquery.magnific-popup.min.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }</script>
+</body>
+</html>

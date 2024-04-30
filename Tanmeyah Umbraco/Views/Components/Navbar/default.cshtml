@@ -1,0 +1,64 @@
+﻿@using System.Globalization
+@using UmbracoBlog.CustomModels
+@model NavBarNode
+@{
+
+    var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+}
+<ul class="second-header sidenav nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+
+
+    <li class="menu-list">
+        <a href="/" class="nav-link link-secondary"><span>@Model.Name</span></a>
+    </li>
+    @foreach (var item in Model.Children)
+    {
+        <li class="menu-list @(item.Children.Any()?"droplist dropdown-btn":"")">
+            @if (item.Children.Any())
+            {
+                <a href="@item.Url" class="dropbtn nav-link link-dark">
+                    <span>@item.Name</span><span class="icon-toggle">
+                        <i class="fa fa-angle-down"></i>
+                    </span>
+                </a>
+                <ul class="dropdown-content dropdown-container">
+                    @foreach (var item2 in item.Children)
+                    {
+                    <li>
+                            <a href="@item2.Url"><span>@item2.Name</span></a>
+                    </li>
+                    }
+
+                </ul>
+            }
+            else
+            {
+                <a href="@item.Url" class="nav-link link-secondary"><span>@item.Name</span></a>
+
+            }
+        </li>
+
+    }
+
+
+    <li class="droplist menu-list">
+        <a href="@Url.Action("SetCulture", "Home", new { culture = (currentCulture == "en" ? "en" : "ar"), returnUrl = Context.Request.Path })"
+           class="dropbtn nav-link link-dark">
+            <span>@(currentCulture == "en" ? "English" : "عربي")</span><span class="icon-toggle">
+                <i class="fa fa-angle-down"></i>
+            </span>
+        </a>
+        <ul class="dropdown-content">
+            <li>
+                <a href="@Url.Action("SetCulture", "Home", new { culture = (currentCulture == "en" ? "ar" : "en"), returnUrl = Context.Request.Path })">
+                    <span>@(currentCulture == "en" ? "عربي" : "English")</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+    <li class="menu-list">
+        <div class="search col-md-3 text-end">
+            <img src="/images/search-normal.svg" alt="" />
+        </div>
+    </li>
+</ul>
