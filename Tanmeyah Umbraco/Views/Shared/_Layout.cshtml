@@ -1,8 +1,11 @@
 ﻿@using System.Globalization
 @using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-   
+    var about = Model.Children().Where(c => c.IsDocumentType("AboutUs")).FirstOrDefault();
+    var financingProgram = Model.Children().Where(c => c.IsDocumentType("FinancingPrograms")).FirstOrDefault();
+    var HomeBanners = Model.Children().Where(c => c.IsDocumentType("HomeBanners")).FirstOrDefault();
     var currentCulture = CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
 }
 <html lang="@CultureInfo.CurrentCulture.TwoLetterISOLanguageName" dir="@(currentCulture=="en"?"ltr":"rtl")">
@@ -13,7 +16,8 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/App.UI.styles.css" asp-append-version="true" />  
+   
+    <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/lib/magnific-popup.js/magnific-popup.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -26,7 +30,7 @@
                             <path fill="#ffffff"
                                   d="M172.3 501.7C27 291 0 269.4 0 192 0 86 86 0 192 0s192 86 192 192c0 77.4-27 99-172.3 309.7-9.5 13.8-29.9 13.8-39.5 0zM192 272c44.2 0 80-35.8 80-80s-35.8-80-80-80-80 35.8-80 80 35.8 80 80 80z" />
                         </svg>
-                        <span>K00_Address</span>
+                        <span>@Umbraco.GetDictionaryValue("Address")</span>
                     </li>
                     <li class="tele">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -63,36 +67,38 @@
                             <i class="fa fa-envelope"></i><a href="mailto:info@tanmeyah.com">info@tanmeyah.com</a>
                         </div>
                         <div class="numb-adr"><i class="fa fa-phone"></i><a href="tel:16164">16164</a></div>
-                        <div><i class="fa fa-map-marker"></i><span>.GetLocalizedString("Layout", "K00_Address")</span></div>
+                        <div><i class="fa fa-map-marker"></i><span>@Umbraco.GetDictionaryValue("Address")</span></div>
                         <div class="info-row">
                             <p>
-                                .GetLocalizedString("Layout", "K12_FooterParghraph")
+                                @Umbraco.GetDictionaryValue("Footer Parghraph")
                             </p>
                         </div>
                     </div>
                     <div class="contain-row">
                         <div class="main-title">
-                            <span>.GetLocalizedString("Layout", "K03_ABOUT US")</span>
+                            <span>@about.Name</span>
                         </div>
-                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K04_History")</a></div>
-                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K05_OurPerformance")</a></div>
-                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K06_CorporateCitizenshi")</a></div>
-                        <div class="data-info"><a href="#">.GetLocalizedString("Layout", "K07_SuccessStories")</a></div>
+                        @foreach (var item in about.Children())
+                        {
+                        <div class="data-info"><a href="@item.Url()">@item.Name</a></div>
+                            
+                        }
+                       
                     </div>
                     <div class="contain-row">
                         <div class="main-title">
                             <span>
-                                .GetLocalizedString("Layout", "K13_OURSERVICES")
+                                @Umbraco.GetDictionaryValue("OUR SERVICES")
                             </span>
                         </div>
-                       @*  @foreach (var finincialProgram in FinincialPrograms.Value)
+                        @foreach (var finincialProgram in financingProgram.Children())
                         {
                             <div class="data-info">
-                                <a href="@finincialProgram.UrlName">
+                                <a href="@finincialProgram.Url()">
                                     @finincialProgram.Name
                                 </a>
                             </div>
-                        } *@
+                        }
 
                     </div>
                     <div class="contain-row"><div><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d432.0227504837829!2d31.2840445!3d29.974199!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1458385e217a526b%3A0xe089f0c789577c2d!2z2KrZhtmF2YrZhw!5e0!3m2!1sen!2seg!4v1713181775264!5m2!1sen!2seg" width="300" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div></div>
@@ -103,13 +109,13 @@
                     <div>© 2024 - Tanmeyah</div>
                     <div class="terms">
                         <div class="data-info">
-                            <a href="#">.GetLocalizedString("Layout", "K14_Privacy")</a>
+                            <a href="#">Privacy</a>
                         </div>
                         <div class="data-info">
-                            <a href="#">.GetLocalizedString("Layout", "K15_TermsConditions")</a>
+                            <a href="#">Terms Conditions</a>
                         </div>
                         <div class="data-info">
-                            <a href="#">.GetLocalizedString("Layout", "K16_FRACompliance")</a>
+                            <a href="#">FRA Compliance</a>
                         </div>
                     </div>
                     <div class="terms">

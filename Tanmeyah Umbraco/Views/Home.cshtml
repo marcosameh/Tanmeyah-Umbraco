@@ -1,3 +1,153 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using App.Infrastructure.Extensions
+@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    var financingProgram = Model.Children().Where(c => c.IsDocumentType("FinancingPrograms")).FirstOrDefault();
+    var HomeBanners = Model.Children().Where(c => c.IsDocumentType("HomeBanners")).FirstOrDefault();
+}
+<div class="main">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @foreach (var banner in HomeBanners.Children())
+            {
+                var homeBanner = banner as HomeBanner;
+                <div class="carousel-item @(banner == HomeBanners.Children().First() ? "active" : "")">
+                    <img src="@homeBanner.Photo.Url()" class="d-block w-100" alt="@(string.IsNullOrEmpty(banner.Name)?banner.Name:banner.Name)">
+                </div>
+            }
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<div class="center-content container">
+    <div class="box-one">
+        <div class="red-content">
+            <div class="master-title"><span>@Model.LeftSectionTitle</span><span class="line-heading"></span></div>
+            <div class="much-info">
+                <span>
+
+                  @Model.LeftSectionParghraph
+                </span>
+            </div>
+            <div class="btn-of-read"><a href=""><span>Learn More</span></a></div>
+        </div>
+        <div class="video-thumbnail-container">
+            <!-- Video image -->
+            <img src="@Model.YoutubeVideoUrl.GetYouTubeVideoThumbmial()" alt="Video Thumbnail" class="video-thumbnail">
+            <!-- Play button -->
+            <div id="openVideoPopup" class="video-player"></div>
+        </div>
+
+
+        <!-- Video popup container -->
+        <a class="popup-youtube" id="hiddenVideoLink" href="@Model.YoutubeVideoUrl"></a><br>
+        <div class="yellow-content">
+            <div class="master-title"><span>@Model.RightSectionTitle</span><span class="line-heading"></span></div>
+            <div class="much-info">
+                <span>
+                @Model.RightSectionParghraph
+                </span>
+            </div>
+            <div class="btn-of-read"><a href=""><span>Learn More</span></a></div>
+        </div>
+    </div>
+    <div class="box-two">
+        <span class="title-who">@Model.WhoWeAreTitle</span><span class="line-heading-red"></span>
+        <span class="info-of-who">
+
+            @Model.WhoWeAreParagraph
+        </span>
+        <div class="btn-of-second-read"><a href=""><span>Learn More</span></a></div>
+    </div>
+</div>
+<div class="box-three">
+    <div class="items">
+        <div class="wpsm_number">
+            <span class="counter" id="employeeCounter">Loading...</span>
+            <span class="wpsm_count-title">EMPLOYEES</span>
+        </div>
+    </div>
+    <div class="items">
+        <div class="wpsm_number">
+            <span class="counter" id="customerCounter">
+                Loading...
+            </span>
+            <span class="wpsm_count-title">CUSTOMERS</span>
+        </div>
+    </div>
+    <div class="items">
+        <div class="wpsm_number">
+            <span class="counter" id="branchCounter">Loading...</span>
+            <span class="wpsm_count-title">BRANCHES</span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Function to generate random number within a range
+        function getRandomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // Function to update counter with animation
+        function updateCounter($element, newValue) {
+            $({ count: parseInt($element.text()) }).animate({ count: newValue }, {
+                duration: 300, // Animation duration
+                easing: 'swing', // Easing function
+                step: function () {
+                    $element.text(Math.ceil(this.count));
+                },
+                complete: function () {
+                    $element.text(newValue);
+                }
+            });
+        }
+
+        // Fetch actual values from the backend
+        // You can use AJAX to fetch data from the backend endpoint
+        // For demonstration, I'll use hardcoded values
+        var actualEmployeeCount = @Model.Employee;
+        var actualCustomerCount = @Model.Customer;
+        var actualBranchCount = @Model.Branches;
+
+        // Generate and display random numbers initially
+        $('#employeeCounter').text(getRandomNumber(10, 100));
+        $('#customerCounter').text(getRandomNumber(100, 1000));
+        $('#branchCounter').text(getRandomNumber(5, 50));
+
+        // Update counters with actual values after a delay (for demonstration)
+        setTimeout(function () {
+            updateCounter($('#employeeCounter'), actualEmployeeCount);
+            updateCounter($('#customerCounter'), actualCustomerCount);
+            updateCounter($('#branchCounter'), actualBranchCount);
+        }, 3000); // Adjust delay as needed
+
+        $(document).ready(function () {
+            // Initialize Magnific Popup
+            $('.popup-youtube').magnificPopup({
+                disableOn: 700,
+                type: 'iframe',
+                mainClass: 'mfp-fade',
+                removalDelay: 160,
+                preloader: false,
+                fixedContentPos: false
+            });
+
+            // Add click event listener to the play button overlay
+            $('#openVideoPopup').click(function () {
+                // Trigger click event on the hidden anchor tag
+                $('#hiddenVideoLink').click();
+            });
+        });
+    </script>
+}

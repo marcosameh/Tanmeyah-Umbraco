@@ -48,5 +48,82 @@ namespace Umbraco.Cms.Web.Common.PublishedModels
 		}
 
 		// properties
+
+		///<summary>
+		/// Branches
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[ImplementPropertyType("branches")]
+		public virtual int Branches => this.Value<int>(_publishedValueFallback, "branches");
+
+		///<summary>
+		/// Customer
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[ImplementPropertyType("customer")]
+		public virtual int Customer => this.Value<int>(_publishedValueFallback, "customer");
+
+		///<summary>
+		/// Employee
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[ImplementPropertyType("employee")]
+		public virtual int Employee => this.Value<int>(_publishedValueFallback, "employee");
+
+		///<summary>
+		/// Left Section Paragraph
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("leftSectionParghraph")]
+		public virtual string LeftSectionParghraph => this.Value<string>(_publishedValueFallback, "leftSectionParghraph");
+
+		///<summary>
+		/// Left Section Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("leftSectionTitle")]
+		public virtual string LeftSectionTitle => this.Value<string>(_publishedValueFallback, "leftSectionTitle");
+
+		///<summary>
+		/// Right Section Paragraph
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("rightSectionParghraph")]
+		public virtual string RightSectionParghraph => this.Value<string>(_publishedValueFallback, "rightSectionParghraph");
+
+		///<summary>
+		/// Right Section Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("rightSectionTitle")]
+		public virtual string RightSectionTitle => this.Value<string>(_publishedValueFallback, "rightSectionTitle");
+
+		///<summary>
+		/// Who We Are Paragraph
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("whoWeAreParagraph")]
+		public virtual string WhoWeAreParagraph => this.Value<string>(_publishedValueFallback, "whoWeAreParagraph");
+
+		///<summary>
+		/// Who We Are Title
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("whoWeAreTitle")]
+		public virtual string WhoWeAreTitle => this.Value<string>(_publishedValueFallback, "whoWeAreTitle");
+
+		///<summary>
+		/// Youtube Video Url
+		///</summary>
+		[global::System.CodeDom.Compiler.GeneratedCodeAttribute("Umbraco.ModelsBuilder.Embedded", "13.2.2+79d241a")]
+		[global::System.Diagnostics.CodeAnalysis.MaybeNull]
+		[ImplementPropertyType("youtubeVideoUrl")]
+		public virtual string YoutubeVideoUrl => this.Value<string>(_publishedValueFallback, "youtubeVideoUrl");
 	}
 }
