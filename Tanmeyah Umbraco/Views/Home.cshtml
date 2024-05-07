@@ -3,8 +3,12 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @{
-    var financingProgram = Model.Children().Where(c => c.IsDocumentType("FinancingPrograms")).FirstOrDefault();
+    var financingPrograms = Model.Children().Where(c => c.IsDocumentType("FinancingPrograms")).FirstOrDefault();
     var HomeBanners = Model.Children().Where(c => c.IsDocumentType("HomeBanners")).FirstOrDefault();
+    var aboutUs = Model.Children().FirstOrDefault(c => c.IsDocumentType("AboutUs"));  
+    var SuccessStories= aboutUs.Children().FirstOrDefault(c => c.IsDocumentType("SuccessStories"));
+    
+     
 }
 <div class="main">
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -12,6 +16,7 @@
             @foreach (var banner in HomeBanners.Children())
             {
                 var homeBanner = banner as HomeBanner;
+
                 <div class="carousel-item @(banner == HomeBanners.Children().First() ? "active" : "")">
                     <img src="@homeBanner.Photo.Url()" class="d-block w-100" alt="@(string.IsNullOrEmpty(banner.Name)?banner.Name:banner.Name)">
                 </div>
@@ -91,7 +96,64 @@
         </div>
     </div>
 </div>
+<div class="center-content container">
+    <div class="box-four">
+        <div class="box-four-title">
+            <span class="title-who">
+                @financingPrograms.Name
+            </span>
+        </div>
+        <span class="line-heading-red"></span>
+        <div class="financing-content container">
+            @foreach (var item in financingPrograms.Children())
+            {
+               var  financingProgram= item as FinancingProgram;
+                <div class="box-of-financing">
+                    <div class="contain-imge">
+                        <img src="@financingProgram.MainPhoto.Url()" alt="">
+                        <div class="titles-of-finance">
+                            <span>
+                                @financingPrograms.Name
+                            </span>
+                            <div class="btn-read"><a href="@financingProgram.Url()"><span>Read More</span></a></div>
+                        </div>
+                    </div>
+                </div>
 
+            }
+
+        </div>
+    </div>
+</div>
+
+ <div class="success-back">
+    <div class="box-five container">
+        <span class="title-success">
+            @SuccessStories.Name
+        </span><span class="line-heading-white"></span>
+        <span class="info-success">
+
+            SuccessStoriesParghraph
+        </span>
+    </div>
+    <div class="imge-suceess container">
+        @foreach (var item in SuccessStories.Children())
+        {
+            var successStory = item as SuccessStory;
+            <div class="imge-suc">
+                <img src="@successStory.Photo.Url()" alt="">
+                <div class="title-sucss">
+                    <span>
+                        @successStory.Name
+                    </span>
+                </div>
+            </div>
+
+        }
+
+    </div>
+    <div class="btn-of-read"><a href=""><span>Learn More</span></a></div>
+</div> 
 @section Scripts {
     <script>
         // Function to generate random number within a range

@@ -13,6 +13,8 @@
     </li>
     @foreach (var item in Model.Children)
     {
+        if (item.Name!="Home Banners")
+        {
         <li class="menu-list @(item.Children.Any()?"droplist dropdown-btn":"")">
             @if (item.Children.Any())
             {
@@ -37,6 +39,8 @@
 
             }
         </li>
+            
+        }
 
     }
 
